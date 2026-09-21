@@ -5,7 +5,7 @@
 	},
 	"id": "agatkhas.legacymenu",
 	"name": "Legacy Menu",
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"developers": ["april"],
 	"description": "recreates the 2.1 online menu layout",
 	"tags": ["interface", "customization"],
