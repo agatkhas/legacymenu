@@ -1,0 +1,21 @@
+{
+	"geode": "5.10.0",
+	"gd": {
+		"win": "2.2081"
+	},
+	"id": "agatkhas.legacymenu",
+	"name": "Legacy Menu",
+	"version": "v1.0.0",
+	"developers": ["agatkhas"],
+	"description": "recreates the 2.1 online menu layout, hall of fame doesnt exist anymore so its replaced by lists button",
+	"tags": ["interface", "customization"],
+	"links": {
+		"source": "https://github.com/agatkhas/legacymenu"
+	},
+	"dependencies": {
+		"geode.node-ids": {
+			"version": ">=v1.0.0",
+			"required": true
+		}
+	}
+}
