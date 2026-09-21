@@ -31,6 +31,8 @@ class $modify(CreatorLayer) {
     bool init() {
         if (!CreatorLayer::init()) return false;
 
+        if (Mod::get()->getSettingValue<std::string>("menu-version") != "2.1") return true;
+
         auto menu = static_cast<CCMenu*>(getChildByID("creator-buttons-menu"));
         if (!menu) return true;
 

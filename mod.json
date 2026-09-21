@@ -17,5 +17,13 @@
 			"version": ">=v1.0.0",
 			"required": true
 		}
+	},
+	"settings": {
+		"menu-version": {
+			"name": "menu version",
+			"type": "string",
+			"default": "2.1",
+			"one-of": ["2.2", "2.1"]
+		}
 	}
 }
