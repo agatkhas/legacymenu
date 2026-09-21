@@ -1,5 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/CreatorLayer.hpp>
+#include <algorithm>
 
 using namespace geode::prelude;
 
@@ -7,16 +8,23 @@ const char* ROW_TOP[3] = {"create-button", "saved-button", "scores-button"};
 const char* ROW_MID[4] = {"quests-button", "daily-button", "weekly-button", "gauntlets-button"};
 const char* ROW_BOT[3] = {"featured-button", "map-packs-button", "search-button"};
 
-void placeRow(CCMenu* menu, const char* ids[4], float y, float gap) {
-    int n = 0;
-    while (n < 4 && ids[n]) n++;
-    float startX = -(gap * (n - 1)) / 2.f;
+constexpr float SCALE = 1.1f;
+
+CCMenu* buildRow(CCMenu* src, const char* const* ids, int n, float gap, const char* id) {
+    auto row = CCMenu::create();
+    row->setID(id);
     for (int i = 0; i < n; i++) {
-        auto btn = menu->getChildByID(ids[i]);
+        auto btn = src->getChildByID(ids[i]);
         if (!btn) continue;
-        btn->setPosition({startX + gap * i, y});
-        btn->setScale(1.15f);
+        btn->retain();
+        btn->removeFromParent();
+        btn->setScale(SCALE);
+        row->addChild(btn);
+        btn->release();
     }
+    row->setLayout(RowLayout::create()->setGap(gap));
+    row->updateLayout();
+    return row;
 }
 
 class $modify(CreatorLayer) {
@@ -25,14 +33,24 @@ class $modify(CreatorLayer) {
 
         auto menu = static_cast<CCMenu*>(getChildByID("creator-buttons-menu"));
         if (!menu) return true;
-        menu->setLayout(nullptr);
 
         auto win = CCDirector::get()->getWinSize();
-        menu->setPosition({win.width / 2.f, win.height / 2.f});
 
-        placeRow(menu, ROW_TOP, win.height * 0.22f, 145.f);
-        placeRow(menu, ROW_MID, 0.f, 110.f);
-        placeRow(menu, ROW_BOT, -win.height * 0.22f, 145.f);
+        auto top = buildRow(menu, ROW_TOP, 3, 8.f, "legacymenu-top"_spr);
+        auto mid = buildRow(menu, ROW_MID, 4, 8.f, "legacymenu-mid"_spr);
+        auto bot = buildRow(menu, ROW_BOT, 3, 8.f, "legacymenu-bot"_spr);
+
+        float rowGap = std::max({top->getContentSize().height, mid->getContentSize().height, bot->getContentSize().height}) * 1.05f;
+
+        top->setPosition({win.width / 2.f, win.height / 2.f + rowGap});
+        mid->setPosition({win.width / 2.f, win.height / 2.f});
+        bot->setPosition({win.width / 2.f, win.height / 2.f - rowGap});
+
+        addChild(top);
+        addChild(mid);
+        addChild(bot);
+
+        menu->setVisible(false);
 
         return true;
     }
