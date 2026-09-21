@@ -6,7 +6,7 @@
 	"id": "agatkhas.legacymenu",
 	"name": "Legacy Menu",
 	"version": "v1.0.0",
-	"developers": ["agatkhas"],
+	"developers": ["april"],
 	"description": "recreates the 2.1 online menu layout, hall of fame doesnt exist anymore so its replaced by lists button",
 	"tags": ["interface", "customization"],
 	"links": {
