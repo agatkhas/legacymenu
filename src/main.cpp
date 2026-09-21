@@ -6,7 +6,7 @@ using namespace geode::prelude;
 
 const char* ROW_TOP[3] = {"create-button", "saved-button", "scores-button"};
 const char* ROW_MID[4] = {"quests-button", "daily-button", "weekly-button", "gauntlets-button"};
-const char* ROW_BOT[3] = {"featured-button", "map-packs-button", "search-button"};
+const char* ROW_BOT[4] = {"featured-button", "lists-button", "map-packs-button", "search-button"};
 
 constexpr float SCALE = 1.1f;
 
@@ -38,7 +38,7 @@ class $modify(CreatorLayer) {
 
         auto top = buildRow(menu, ROW_TOP, 3, 8.f, "legacymenu-top"_spr);
         auto mid = buildRow(menu, ROW_MID, 4, 8.f, "legacymenu-mid"_spr);
-        auto bot = buildRow(menu, ROW_BOT, 3, 8.f, "legacymenu-bot"_spr);
+        auto bot = buildRow(menu, ROW_BOT, 4, 8.f, "legacymenu-bot"_spr);
 
         float rowGap = std::max({top->getContentSize().height, mid->getContentSize().height, bot->getContentSize().height}) * 1.05f;
 
